@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calicut Notebook — The Fusion Experience with a Slice of Malabar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --spice:#B5451B; --spice-dark:#8B3212; --spice-light:#D4602A;
+  --turmeric:#D4860A; --gold:#C9922A; --gold-pale:#E8B84B;
+  --cream:#F5EDD8; --parchment:#EDE0C4; --warm:#FAF6EE;
+  --bark:#3D2B1F; --charcoal:#1A0F08; --char2:#221510; --char3:#2E1C10;
+  --smoke:#8C7B6E; --mist:#6B5C52; --leaf:#4A6741;
+  --ticker-h:38px;
+  --nav-h:72px;
+  --header-h:calc(var(--ticker-h) + var(--nav-h));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--charcoal);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--charcoal)}
+::-webkit-scrollbar-thumb{background:var(--spice);border-radius:3px}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════
+   NAVIGATION — THE STAR
+═══════════════════════════════ */
+#nav{
+  position:fixed;top:var(--ticker-h);left:0;right:0;z-index:1000;
+  height:var(--nav-h);
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 3rem;
+  transition:background .5s ease,border-color .5s ease,height .4s ease,box-shadow .5s ease;
+}
+#nav.solid{
+  background:rgba(22,12,6,.97);
+  backdrop-filter:blur(18px) saturate(1.4);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border-bottom:1px solid rgba(181,69,27,.18);
+  box-shadow:0 4px 40px rgba(0,0,0,.5);
+  height:64px;
+}
+/* Left links */
+.nav-left{
+  display:flex;align-items:center;gap:2.2rem;justify-content:flex-start;
+}
+/* Center logo */
+.nav-center{
+  display:flex;align-items:center;justify-content:center;
+}
+/* Right links */
+.nav-right{
+  display:flex;align-items:center;gap:2.2rem;justify-content:flex-end;
+}
+/* Hamburger lives inside nav-right on mobile */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:.5rem;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);transition:all .3s}
+.nav-link{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,237,216,.72);text-decoration:none;
+  transition:color .3s,opacity .3s;
+  position:relative;white-space:nowrap;
+}
+.nav-link::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:1px;background:var(--turmeric);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s ease;
+}
+.nav-link:hover{color:var(--cream);}
+.nav-link:hover::after{transform:scaleX(1);}
+.nav-reserve{
+  background:var(--spice);color:var(--cream) !important;
+  padding:.5rem 1.3rem;border-radius:2px;
+  font-size:.7rem;letter-spacing:.2em;
+  transition:background .3s,transform .2s !important;
+}
+.nav-reserve::after{display:none !important;}
+.nav-reserve:hover{background:var(--spice-light);transform:translateY(-1px) !important;}
+
+/* LOGO */
+.nav-logo-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  text-decoration:none;gap:.15rem;
+  transition:transform .3s;
+}
+.nav-logo-wrap:hover{transform:scale(1.03);}
+.nav-logo-top{
+  font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--turmeric);font-family:'DM Sans',sans-serif;font-weight:300;
+}
+.nav-logo-main{
+  font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;
+  color:var(--cream);line-height:1;letter-spacing:.04em;
+}
+.nav-logo-sub{
+  font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(245,237,216,.45);font-family:'DM Sans',sans-serif;font-weight:300;
+}
+.nav-logo-line{
+  width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,146,42,.6),transparent);
+  margin:.1rem 0;
+}
+
+/* Mobile drawer */
+.mobile-nav{
+  position:fixed;inset:0;z-index:1002;
+  background:rgba(18,9,4,.98);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.175,1);
+}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav a{
+  font-family:'Playfair Display',serif;font-size:2.2rem;font-style:italic;
+  color:rgba(245,237,216,.8);text-decoration:none;
+  transition:color .3s,transform .3s;
+}
+.mobile-nav a:hover{color:var(--turmeric);transform:translateX(8px)}
+.mobile-close{
+  position:absolute;top:1.5rem;right:1.8rem;
+  background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;opacity:.7;
+}
+
+/* ─── ANNOUNCEMENT BAR ─── */
+#ticker{
+  background:var(--spice);height:var(--ticker-h);
+  display:flex;align-items:center;overflow:hidden;
+  position:fixed;top:0;left:0;right:0;z-index:1001;
+}
+#ticker::before,#ticker::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;
+}
+#ticker::before{left:0;background:linear-gradient(90deg,var(--spice),transparent)}
+#ticker::after{right:0;background:linear-gradient(-90deg,var(--spice),transparent)}
+.ticker-track{
+  display:flex;gap:0;
+  animation:ticker-roll 28s linear infinite;
+  white-space:nowrap;
+}
+.ticker-item{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,237,216,.9);padding:0 3rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.ticker-dot{
+  width:4px;height:4px;border-radius:50%;background:rgba(245,237,216,.5);flex-shrink:0;
+}
+@keyframes ticker-roll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;padding-top:var(--header-h);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 80% at 15% 60%,rgba(181,69,27,.16) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 25%,rgba(212,134,10,.1) 0%,transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(61,43,31,.8) 0%,transparent 70%),
+    linear-gradient(170deg,#0D0603 0%,#1A0F08 35%,#221510 65%,#180B04 100%);
+}
+/* Decorative botanical ring */
+.hero-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);
+  width:680px;height:680px;border-radius:50%;
+  border:1px solid rgba(201,146,42,.06);
+  pointer-events:none;
+}
+.hero-ring::before{
+  content:'';position:absolute;inset:30px;border-radius:50%;
+  border:1px solid rgba(181,69,27,.08);
+}
+.hero-ring::after{
+  content:'';position:absolute;inset:60px;border-radius:50%;
+  border:1px solid rgba(245,237,216,.04);
+}
+/* Spice particles */
+.sparks{position:absolute;inset:0;pointer-events:none;}
+.spark{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold);animation:spark-float linear infinite;opacity:0;}
+@keyframes spark-float{
+  0%{transform:translateY(110vh) rotate(0);opacity:0}
+  8%{opacity:.9}85%{opacity:.5}
+  100%{transform:translateY(-60px) rotate(720deg);opacity:0}
+}
+.hero-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:3rem 2rem 5rem;max-width:920px;
+}
+.hero-kicker{
+  font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--turmeric);margin-bottom:1.8rem;
+  display:flex;align-items:center;gap:1.2rem;
+  opacity:0;animation:up .9s ease .2s forwards;
+}
+.hero-kicker-line{width:36px;height:1px;background:rgba(212,134,10,.5);}
+/* BIG LOGO MARK */
+.hero-logomark{
+  margin-bottom:2rem;
+  opacity:0;animation:up .9s ease .4s forwards;
+}
+.hero-logomark-inner{
+  display:inline-flex;flex-direction:column;align-items:center;gap:.2rem;
+}
+.hl-top{font-size:.6rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(245,237,216,.5);font-weight:300;}
+.hl-brand{
+  font-family:'Playfair Display',serif;font-size:clamp(3.2rem,7vw,6rem);
+  font-weight:900;color:var(--cream);line-height:1;letter-spacing:.02em;
+  text-shadow:0 0 80px rgba(181,69,27,.3);
+}
+.hl-notebook{
+  font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.8rem);
+  font-weight:400;font-style:italic;color:var(--turmeric);letter-spacing:.1em;line-height:1;
+}
+.hl-divider{
+  display:flex;align-items:center;gap:.8rem;width:100%;max-width:340px;margin:.4rem 0;
+}
+.hl-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,146,42,.5),transparent);}
+.hl-divider-icon{color:var(--gold);font-size:.7rem;opacity:.8;}
+.hl-sub{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,237,216,.4);}
+.hero-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,2.8vw,1.9rem);
+  font-weight:300;font-style:italic;
+  color:rgba(245,237,216,.7);
+  margin-bottom:2.8rem;line-height:1.5;
+  opacity:0;animation:up .9s ease .7s forwards;
+}
+.hero-tagline em{color:var(--gold-pale);font-style:normal;}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:up .9s ease .9s forwards;
+}
+.btn-spice{
+  background:var(--spice);color:var(--cream);padding:.9rem 2.2rem;
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;border:none;cursor:pointer;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.btn-spice::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+  transform:translateX(-100%);transition:transform .5s;
+}
+.btn-spice:hover::before{transform:translateX(100%)}
+.btn-spice:hover{background:var(--spice-light);transform:translateY(-2px);box-shadow:0 10px 28px rgba(181,69,27,.35);}
+.btn-ghost{
+  background:transparent;color:var(--cream);padding:.9rem 2.2rem;
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;border:1px solid rgba(245,237,216,.22);cursor:pointer;
+  transition:all .3s;
+}
+.btn-ghost:hover{border-color:var(--turmeric);color:var(--turmeric);transform:translateY(-2px);}
+/* hero stats strip */
+.hero-stats{
+  position:absolute;bottom:0;left:0;right:0;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(245,237,216,.06);
+  background:rgba(18,9,4,.6);backdrop-filter:blur(8px);
+  z-index:3;
+}
+.hs-item{
+  padding:1.4rem 1rem;border-right:1px solid rgba(245,237,216,.06);
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+}
+.hs-item:last-child{border-right:none}
+.hs-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--turmeric);line-height:1;}
+.hs-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);}
+/* scroll arrow */
+.hero-scroll{
+  position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fade .8s ease 1.4s forwards;cursor:pointer;z-index:4;
+}
+.hero-scroll-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--smoke);}
+.hero-scroll-arrow{width:1px;height:44px;background:linear-gradient(to bottom,var(--turmeric),transparent);animation:arrow-pulse 2s ease-in-out infinite;}
+@keyframes arrow-pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.7)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* ═══════════════════════════════
+   SHARED
+═══════════════════════════════ */
+.sec{padding:7rem 0;position:relative;}
+.sec-dark{background:var(--charcoal);}
+.sec-darker{background:#100806;}
+.sec-warm{background:var(--char2);}
+.sec-deep{background:#0A0502;}
+.container{max-width:1180px;margin:0 auto;padding:0 3rem;}
+.label{
+  font-size:.65rem;letter-spacing:.38em;text-transform:uppercase;
+  color:var(--turmeric);margin-bottom:.9rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.label::after{content:'';display:block;width:26px;height:1px;background:rgba(212,134,10,.45);}
+.h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:600;line-height:1.18;
+  color:var(--cream);margin-bottom:1.4rem;
+}
+.h2 em{font-style:italic;color:var(--turmeric);}
+.body-serif{
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.85;color:var(--smoke);
+}
+/* reveal */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s ease;}
+.rv.in{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ═══════════════════════════════
+   ABOUT
+═══════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.about-photos{position:relative;height:580px;}
+.ap-main{
+  position:absolute;top:0;left:0;width:76%;height:80%;
+  object-fit:cover;border-radius:3px;
+  filter:brightness(.85) saturate(.85);
+}
+.ap-float{
+  position:absolute;bottom:0;right:0;width:52%;height:52%;
+  object-fit:cover;border-radius:3px;
+  border:4px solid var(--char2);
+  filter:brightness(.8) saturate(.85);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.ap-badge{
+  position:absolute;top:48%;right:10%;
+  transform:translateY(-50%);
+  width:106px;height:106px;border-radius:50%;
+  background:var(--spice);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 8px 32px rgba(181,69,27,.45);z-index:5;
+}
+.ap-badge-num{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:var(--cream);line-height:1;}
+.ap-badge-txt{font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,237,216,.8);line-height:1.4;margin-top:3px;}
+.about-quote{
+  margin-top:2.5rem;padding:1.5rem 2rem;
+  border-left:2px solid var(--spice);
+  background:rgba(181,69,27,.06);border-radius:0 3px 3px 0;
+}
+.about-quote p{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(245,237,216,.75);line-height:1.7;}
+.about-quote cite{display:block;margin-top:.6rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--turmeric);font-style:normal;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem;background:rgba(245,237,216,.06);}
+.stat{background:var(--char2);padding:1.5rem 1rem;text-align:center;}
+.stat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--turmeric);line-height:1;}
+.stat-l{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);margin-top:.3rem;}
+
+/* ═══════════════════════════════
+   SIGNATURES
+═══════════════════════════════ */
+.sigs-header{text-align:center;max-width:600px;margin:0 auto 4.5rem;}
+.sigs-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:auto auto;
+  gap:1.2rem;
+}
+.sig{position:relative;overflow:hidden;border-radius:3px;cursor:pointer;}
+.sig:nth-child(1){grid-column:span 5;grid-row:span 2;}
+.sig:nth-child(2){grid-column:span 4;}
+.sig:nth-child(3){grid-column:span 3;}
+.sig:nth-child(4){grid-column:span 4;}
+.sig:nth-child(5){grid-column:span 3;}
+.sig img{
+  width:100%;height:100%;min-height:260px;object-fit:cover;display:block;
+  filter:brightness(.68) saturate(.8);
+  transition:transform .7s ease,filter .6s ease;
+}
+.sig:nth-child(1) img{min-height:540px;}
+.sig:hover img{transform:scale(1.06);filter:brightness(.5) saturate(.95);}
+.sig-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(12,5,2,.92) 0%,rgba(12,5,2,.18) 55%,transparent 100%);
+  padding:1.8rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.sig-cat{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--turmeric);margin-bottom:.45rem;}
+.sig-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:.3rem;}
+.sig-price{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);}
+.sig-desc{
+  font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(245,237,216,.7);
+  line-height:1.5;max-height:0;overflow:hidden;margin-top:.4rem;
+  transition:max-height .45s ease;
+}
+.sig:hover .sig-desc{max-height:80px;}
+
+/* ═══════════════════════════════
+   GALLERY STRIP
+═══════════════════════════════ */
+.gstrip{display:flex;height:300px;overflow:hidden;}
+.gstrip-item{flex:1;overflow:hidden;transition:flex .55s cubic-bezier(.25,.46,.45,.94);}
+.gstrip-item:hover{flex:2.8;}
+.gstrip-item img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.6) saturate(.8);
+  transition:filter .55s ease;
+}
+.gstrip-item:hover img{filter:brightness(.8) saturate(1.05);}
+
+/* ═══════════════════════════════
+   MENU
+═══════════════════════════════ */
+.menu-header{text-align:center;max-width:600px;margin:0 auto 3.5rem;}
+.tabs-wrap{display:flex;justify-content:center;margin-bottom:3.5rem;}
+.tabs{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:0;
+  border:1px solid rgba(245,237,216,.1);border-radius:3px;overflow:hidden;
+}
+.tab{
+  padding:.72rem 1.4rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--smoke);background:none;border:none;border-right:1px solid rgba(245,237,216,.1);
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s;white-space:nowrap;
+}
+.tab:last-child{border-right:none;}
+.tab:hover:not(.on){background:rgba(245,237,216,.04);color:var(--cream);}
+.tab.on{background:var(--spice);color:var(--cream);}
+.panel{display:none;}.panel.on{display:block;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.msec{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--turmeric);
+  padding:1.4rem 1.4rem .5rem;grid-column:1/-1;
+  border-bottom:1px solid rgba(201,146,42,.15);letter-spacing:.04em;}
+.mi{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:1rem 1.4rem;border-bottom:1px solid rgba(245,237,216,.05);
+  transition:background .25s;
+}
+.mi:nth-child(even){border-right:1px solid rgba(245,237,216,.05);}
+.mi:last-child,.mi:nth-last-child(2):nth-child(odd){border-bottom:none;}
+.mi:hover{background:rgba(245,237,216,.03);}
+.mi-l{flex:1}
+.mi-name{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:500;color:var(--cream);}
+.mi-desc{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--smoke);margin-top:.1rem;}
+.mi-p{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--gold);margin-left:1.5rem;white-space:nowrap;flex-shrink:0;}
+.badge{display:inline-block;font-size:.53rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 5px;border-radius:2px;margin-left:5px;vertical-align:middle;}
+.badge-sig{background:rgba(181,69,27,.18);color:var(--spice);}
+.badge-pop{background:rgba(212,134,10,.15);color:var(--turmeric);}
+.badge-veg{background:rgba(74,103,65,.18);color:#7dc073;}
+
+/* ═══════════════════════════════
+   EXPERIENCE
+═══════════════════════════════ */
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.exp-photos{position:relative;padding-bottom:3rem;}
+.ep-main{width:100%;height:460px;object-fit:cover;border-radius:3px;filter:brightness(.82) saturate(.88);}
+.ep-float{
+  position:absolute;bottom:0;right:-1.5rem;
+  width:55%;border-radius:3px;overflow:hidden;
+  border:4px solid var(--charcoal);
+}
+.ep-float img{width:100%;height:180px;object-fit:cover;filter:brightness(.8);}
+.feat{display:flex;gap:1rem;padding:1.3rem;border:1px solid rgba(245,237,216,.06);border-radius:3px;
+  background:rgba(245,237,216,.02);transition:all .3s;margin-top:1.4rem;}
+.feat:hover{background:rgba(245,237,216,.04);border-color:rgba(201,146,42,.15);}
+.feat-icon {
+  font-size: 1.4rem;
+  width: 38px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.feat-icon-img {
+  width: 38px;
+  height: 38px;
+
+  background-color: var(--turmeric);
+
+  -webkit-mask: url('pestle.png') no-repeat center;
+  -webkit-mask-size: contain;
+
+  mask: url('pestle.png') no-repeat center;
+  mask-size: contain;
+}
+.icon {
+  width: 38px;
+  height: 38px;
+  background-color: var(--turmeric);
+
+  -webkit-mask: url('pestle.png') no-repeat center;
+  -webkit-mask-size: contain;
+
+  mask: url('pestle.png') no-repeat center;
+  mask-size: contain;
+}
+.feat-h{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--cream);margin-bottom:.28rem;}
+.feat-p{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--smoke);line-height:1.55;}
+
+/* ═══════════════════════════════
+   REVIEWS
+═══════════════════════════════ */
+.rev-header{text-align:center;margin-bottom:4rem;}
+.rev-score{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-bottom:3rem;}
+.rev-num{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:700;color:var(--turmeric);line-height:1;}
+.stars-row{color:var(--turmeric);font-size:1.15rem;letter-spacing:3px;margin-bottom:4px;}
+.rev-meta{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.rev-card{
+  padding:2rem;background:rgba(245,237,216,.028);
+  border:1px solid rgba(245,237,216,.07);border-radius:4px;
+  position:relative;transition:all .35s;
+}
+.rev-card::before{
+  content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;
+  color:var(--spice);opacity:.18;position:absolute;top:.2rem;left:1.3rem;line-height:1;
+}
+.rev-card:hover{background:rgba(245,237,216,.05);border-color:rgba(201,146,42,.18);transform:translateY(-5px);box-shadow:0 18px 45px rgba(0,0,0,.35);}
+.rev-stars{color:var(--turmeric);font-size:.82rem;margin-bottom:.9rem;letter-spacing:2px;}
+.rev-text{font-family:'Cormorant Garamond',serif;font-size:1.08rem;line-height:1.72;color:rgba(245,237,216,.82);font-style:italic;margin-bottom:1.4rem;}
+.rev-av{display:flex;align-items:center;gap:.75rem;}
+.rev-circle{width:36px;height:36px;border-radius:50%;background:var(--spice);display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:.88rem;font-weight:600;color:var(--cream);flex-shrink:0;}
+.rev-name{font-size:.85rem;font-weight:500;color:var(--cream);}
+.rev-src{font-size:.68rem;color:var(--smoke);margin-top:1px;}
+
+/* ═══════════════════════════════
+   CONTACT + MAP
+═══════════════════════════════ */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;}
+.ci{display:flex;gap:1rem;align-items:flex-start;margin-top:1.5rem;}
+.ci-icon{color:var(--turmeric);font-size:1rem;width:22px;flex-shrink:0;margin-top:3px;}
+.ci-lbl{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);margin-bottom:.3rem;}
+.ci-val{font-family:'Cormorant Garamond',serif;font-size:1.08rem;color:var(--cream);line-height:1.55;}
+.ci-val a{color:var(--turmeric);text-decoration:none;transition:color .3s;}
+.ci-val a:hover{color:var(--gold-pale);}
+.map-block{border-radius:4px;overflow:hidden;border:1px solid rgba(245,237,216,.08);}
+.map-frame{
+  width:100%;height:320px;border:none;
+  filter:invert(1) hue-rotate(180deg) brightness(.85) saturate(.7);
+}
+.map-bar{
+  background:rgba(245,237,216,.03);padding:1.2rem 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(245,237,216,.08);flex-wrap:wrap;gap:.8rem;
+}
+.map-addr{font-family:'Cormorant Garamond',serif;font-size:.98rem;color:var(--smoke);}
+.map-addr strong{color:var(--cream);font-style:normal;font-weight:500;}
+.map-cta{
+  background:var(--spice);color:var(--cream);
+  padding:.55rem 1.2rem;border-radius:2px;font-size:.7rem;
+  letter-spacing:.15em;text-transform:uppercase;text-decoration:none;
+  transition:background .3s;white-space:nowrap;
+}
+.map-cta:hover{background:var(--spice-light);}
+/* reservation card */
+.res-card{
+  background:rgba(245,237,216,.03);border:1px solid rgba(245,237,216,.08);
+  border-radius:4px;padding:2.2rem;margin-top:2rem;
+}
+.res-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--cream);margin-bottom:1.8rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);margin-bottom:.45rem;}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:rgba(245,237,216,.04);
+  border:1px solid rgba(245,237,216,.1);color:var(--cream);
+  padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;
+  border-radius:2px;outline:none;transition:border-color .3s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--turmeric);}
+.fg select option{background:var(--char3);}
+.fg textarea{height:80px;resize:vertical;}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem;}
+.hours-item{display:flex;justify-content:space-between;font-size:.82rem;}
+.hours-day{color:var(--smoke);}
+.hours-time{color:var(--cream);}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer{background:#060302;padding:4.5rem 0 2rem;border-top:1px solid rgba(245,237,216,.05);}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3rem;}
+.foot-brand-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:.2rem;}
+.foot-brand-sub{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--turmeric);margin-bottom:1rem;}
+.foot-desc{font-family:'Cormorant Garamond',serif;font-size:.98rem;line-height:1.75;color:var(--smoke);margin-bottom:1.5rem;}
+.socials{display:flex;gap:.7rem;}
+.soc{
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(245,237,216,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--smoke);text-decoration:none;font-size:.78rem;
+  transition:all .3s;
+}
+.soc:hover{background:var(--spice);border-color:var(--spice);color:var(--cream);}
+.foot-h{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--turmeric);margin-bottom:1.1rem;}
+.foot-ul{list-style:none;}
+.foot-ul li{margin-bottom:.65rem;}
+.foot-ul a{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--smoke);text-decoration:none;transition:color .3s;}
+.foot-ul a:hover{color:var(--cream);}
+.foot-p{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--smoke);line-height:1.7;}
+.foot-p a{color:var(--turmeric);text-decoration:none;}
+.foot-bottom{
+  border-top:1px solid rgba(245,237,216,.05);padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.foot-copy{font-size:.72rem;color:rgba(140,123,110,.55);font-family:'Cormorant Garamond',serif;}
+.foot-locs{display:flex;gap:.8rem;flex-wrap:wrap;}
+.foot-loc{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(140,123,110,.4);}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media(max-width:1100px){
+  .sigs-grid{grid-template-columns:1fr 1fr;}
+  .sig:nth-child(1){grid-column:span 2;grid-row:auto;}
+  .sig:nth-child(n){grid-column:span 1;}
+}
+@media(max-width:900px){
+  #nav{grid-template-columns:1fr auto 1fr;padding:0 1.5rem;}
+  .nav-left{display:none;}
+  .nav-right .nav-link,.nav-right .nav-reserve{display:none;}
+  .hamburger{display:flex;}
+  .about-grid,.exp-grid,.contact-wrap{grid-template-columns:1fr;gap:3rem;}
+  .about-photos{height:400px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .rev-grid{grid-template-columns:1fr 1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:2.5rem;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  :root{--nav-h:56px;}
+  .container{padding:0 1.2rem;}
+  .sec{padding:4.5rem 0;}
+  #nav{height:var(--nav-h);}.nav-logo-main{font-size:1.1rem;}
+  .hero-stats{display:none;}
+  .sigs-grid{grid-template-columns:1fr;}
+  .menu-grid{grid-template-columns:1fr;}
+  .mi:nth-child(even){border-right:none;}
+  .rev-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;text-align:center;}
+  .hl-brand{font-size:3rem;}
+  .hl-notebook{font-size:1.5rem;}
+  .fg-row{grid-template-columns:1fr;}
+  .tabs{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ ANNOUNCEMENT TICKER ══ -->
+<div id="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#about" class="nav-link">Our Story</a>
+    <a href="#specialties" class="nav-link">Signatures</a>
+    <a href="#menu" class="nav-link">Menu</a>
+  </div>
+
+  <div class="nav-center">
+    <a href="#hero" class="nav-logo-wrap">
+      <span class="nav-logo-top">Est. 2012</span>
+      <div class="nav-logo-line"></div>
+      <span class="nav-logo-main">Calicut Notebook</span>
+      <div class="nav-logo-line"></div>
+      <span class="nav-logo-sub">Restaurant · Edappal</span>
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="#contact" class="nav-link">Find Us</a>
+    <a href="#contact" class="nav-link nav-reserve">Reserve</a>
+    <button class="hamburger" id="hbg" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-nav" id="mobNav">
+  <button class="mobile-close" id="mobClose">✕</button>
+  <a href="#about" class="mob-l">Our Story</a>
+  <a href="#specialties" class="mob-l">Signatures</a>
+  <a href="#menu" class="mob-l">Menu</a>
+  <a href="#reviews" class="mob-l">Reviews</a>
+  <a href="#contact" class="mob-l">Find Us</a>
+  <a href="#contact" class="mob-l">Reserve a Table</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="sparks" id="sparks"></div>
+
+  <div class="hero-inner">
+    <div class="hero-kicker">
+      <span class="hero-kicker-line"></span>
+      The One &amp; Only South Indian Fusion Restaurant Chain
+      <span class="hero-kicker-line"></span>
+    </div>
+
+    <div class="hero-logomark">
+      <div class="hero-logomark-inner">
+        <span class="hl-top">Calicut</span>
+        <div class="hl-divider"><span class="hl-divider-line"></span><span class="hl-divider-icon">✦</span><span class="hl-divider-line"></span></div>
+        <span class="hl-brand">NOTEBOOK</span>
+        <span class="hl-notebook">Restaurant</span>
+        <div class="hl-divider"><span class="hl-divider-line"></span><span class="hl-divider-icon">✦</span><span class="hl-divider-line"></span></div>
+        <span class="hl-sub">Forum Center · Edappal · Malappuram</span>
+      </div>
+    </div>
+
+    <p class="hero-tagline">
+      The fusion experience with a <em>slice of Malabar</em> —<br>
+      where Kerala's ancient spices meet the flavours of the world
+    </p>
+
+    <div class="hero-btns">
+      <a href="#menu" class="btn-spice">Explore the Menu</a>
+      <a href="#contact" class="btn-ghost">Reserve a Table</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-scroll-arrow"></div>
+    <span class="hero-scroll-label">Scroll</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hs-item rv">
+      <span class="hs-num">4.1★</span>
+      <span class="hs-label">Google Rating</span>
+    </div>
+    <div class="hs-item rv d1">
+      <span class="hs-num">2012</span>
+      <span class="hs-label">Est. Calicut</span>
+    </div>
+    <div class="hs-item rv d2">
+      <span class="hs-num">8+</span>
+      <span class="hs-label">Locations</span>
+    </div>
+    <div class="hs-item rv d3">
+      <span class="hs-num">200+</span>
+      <span class="hs-label">Dishes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="sec sec-warm">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photos rv">
+        <img class="ap-main" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Dining room" loading="lazy">
+        <img class="ap-float" src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&q=80" alt="Kerala spices" loading="lazy">
+        <div class="ap-badge">
+          <div class="ap-badge-num">4.1★</div>
+          <div class="ap-badge-txt">Google<br>Edappal</div>
+        </div>
+      </div>
+      <div>
+        <div class="label rv">Our Story</div>
+        <h2 class="h2 rv d1">Born in <em>Malabar,</em><br>Beloved Worldwide</h2>
+        <p class="body-serif rv d2">
+          Since our humble beginnings in 2012, Calicut Notebook has been the one and only South Indian fusion restaurant chain — weaving the ancient spice heritage of Kerala with the culinary inspirations of France, Thailand, Japan, Arabia and beyond.
+        </p>
+        <div class="about-quote rv d3">
+          <p>"Stepping into Calicut Notebook, I was immediately drawn to the warm, modern ambiance. The flavours were a symphony of spices and textures — a true celebration of Malabar cuisine."</p>
+          <cite>— Guest Review, Edappal</cite>
+        </div>
+        <div class="stats-row rv d4">
+          <div class="stat"><div class="stat-n">2012</div><div class="stat-l">Founded</div></div>
+          <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Locations</div></div>
+          <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Dishes</div></div>
+          <div class="stat"><div class="stat-n">4.1★</div><div class="stat-l">Rated</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SIGNATURES ══ -->
+<section id="specialties" class="sec sec-deep">
+  <div class="container">
+    <div class="sigs-header">
+      <div class="label rv" style="justify-content:center">Chef's Pride</div>
+      <h2 class="h2 rv d1" style="text-align:center">Our <em>Signature</em> Dishes</h2>
+      <p class="body-serif rv d2" style="text-align:center">Crafted with Malabar soul and global inspiration — dishes that bring guests back again and again</p>
+    </div>
+    <div class="sigs-grid rv">
+      <div class="sig">
+        <img src="https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?w=900&q=85" alt="Fish Kumarakom" loading="lazy">
+        <div class="sig-ov">
+          <div class="sig-cat">Signature · Seafood</div>
+          <div class="sig-name">Fish Kumarakom</div>
+          <div class="sig-desc">A legendary Kerala preparation — fish simmered in a rich, tangy kodampuli gravy with aromatic Malabar spices. The dish that started it all.</div>
+          <div class="sig-price">As Per Season</div>
+        </div>
+      </div>
+      <div class="sig">
+        <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=700&q=80" alt="Chicken Palli Palayam" loading="lazy">
+        <div class="sig-ov">
+          <div class="sig-cat">Signature · Chicken</div>
+          <div class="sig-name">Chicken Palli Palayam</div>
+          <div class="sig-desc">Slow-roasted in a peppery coconut masala — a true taste of North Kerala.</div>
+          <div class="sig-price">₹280</div>
+        </div>
+      </div>
+      <div class="sig">
+        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=700&q=80" alt="Bamboo Biryani" loading="lazy">
+        <div class="sig-ov">
+          <div class="sig-cat">Signature · Biriyani</div>
+          <div class="sig-name">Bamboo Chicken Biriyani</div>
+          <div class="sig-desc">Malabar-spiced rice &amp; chicken cooked inside bamboo — a showstopper every time.</div>
+          <div class="sig-price">₹200</div>
+        </div>
+      </div>
+      <div class="sig">
+        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=700&q=80" alt="Appam Stew" loading="lazy">
+        <div class="sig-ov">
+          <div class="sig-cat">Breakfast · Classic</div>
+          <div class="sig-name">Appam &amp; Vegetable Stew</div>
+          <div class="sig-desc">Paper-thin lacy hoppers with a delicate coconut milk stew — Kerala's morning ritual.</div>
+          <div class="sig-price">₹120</div>
+        </div>
+      </div>
+      <div class="sig">
+        <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=700&q=80" alt="Chemmeen Kumarakom" loading="lazy">
+        <div class="sig-ov">
+          <div class="sig-cat">Signature · Seafood</div>
+          <div class="sig-name">Chemmeen Kumarakom</div>
+          <div class="sig-desc">Plump prawns in a fiery Malabar masala — bold, unapologetic, unforgettable.</div>
+          <div class="sig-price">₹380</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gstrip">
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=500&q=70" alt="" loading="lazy"></div>
+  <div class="gstrip-item"><img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=500&q=70" alt="" loading="lazy"></div>
+</div>
+
+<!-- ══ FULL MENU ══ -->
+<section id="menu" class="sec sec-darker">
+  <div class="container">
+    <div class="menu-header">
+      <div class="label rv" style="justify-content:center">Explore</div>
+      <h2 class="h2 rv d1" style="text-align:center">The Full <em>Menu</em></h2>
+      <p class="body-serif rv d2" style="text-align:center">Every dish carries the soul of Malabar — and a world of inspiration</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab on" data-t="starters">Starters</button>
+        <button class="tab" data-t="seafood">Seafood</button>
+        <button class="tab" data-t="chicken">Chicken</button>
+        <button class="tab" data-t="mutton">Mutton &amp; Beef</button>
+        <button class="tab" data-t="veg">Vegetarian</button>
+        <button class="tab" data-t="rice">Rice &amp; Biriyani</button>
+        <button class="tab" data-t="breads">Breads</button>
+        <button class="tab" data-t="drinks">Drinks &amp; Desserts</button>
+      </div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="panel on" id="p-starters">
+      <div class="menu-grid">
+        <div class="msec">Starters</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Spinach Delight<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Gobi Pepper Dry Fry<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Baby Corn Mushroom</div><div class="mi-desc">Pepper & Salt</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Dynamite Paneer<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹200</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Dynamite Prawns</div></div><div class="mi-p">₹430</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Paneer Kanthari Tawa</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Angel Honey Wings</div></div><div class="mi-p">₹230</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Panko Crisp Basket</div><div class="mi-desc">Fish / Chicken</div></div><div class="mi-p">₹340</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Kanthari Tawa<span class="badge badge-sig">Chef's Pick</span></div></div><div class="mi-p">₹390</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Thai Grilled Chicken</div></div><div class="mi-p">₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Screw Driver</div></div><div class="mi-p">₹80/ps</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pandanas Chicken<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹90/ps</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Honey Glazed Chicken<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹390</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Dragon Chicken</div></div><div class="mi-p">₹390</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Dry Fry</div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Deviled Caramelized Beef</div></div><div class="mi-p">₹430</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Pepper Dry Fry</div></div><div class="mi-p">₹340</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Fillet Kanthari Tawa</div></div><div class="mi-p">₹90/ps</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Elayil Tawa</div></div><div class="mi-p">₹90/ps</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Crunchy Munchy Prawns</div></div><div class="mi-p">₹80 ps / ₹400</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Thai Grilled Prawns<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹90 ps / ₹410</div></div>
+        <div class="msec">Salads</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pazhassi Salad</div></div><div class="mi-p">₹250</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Spicy Raw Mango Salad</div></div><div class="mi-p">₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Thai Mango Salad</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Malabar Corn Salsa<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Grilled Chicken with Avocado</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Boiled Veg<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹120</div></div>
+        <div class="msec">Soups</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Satay De Potage</div></div><div class="mi-p">₹190</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Seafood Malabari</div></div><div class="mi-p">₹140</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tom-Yum Soup</div><div class="mi-desc">Veg ₹130 · Chicken ₹150 · Prawns ₹180</div></div><div class="mi-p">From ₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Nadan Soup</div><div class="mi-desc">Veg ₹110 · Mutton ₹160 · Chicken ₹140</div></div><div class="mi-p">From ₹110</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Hot &amp; Sour</div><div class="mi-desc">Veg ₹120 · Chicken ₹150</div></div><div class="mi-p">From ₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Sweet Corn</div><div class="mi-desc">Veg ₹120 · Chicken ₹150</div></div><div class="mi-p">From ₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Cream Soup</div><div class="mi-desc">Veg ₹130 · Mushroom ₹160 · Chicken ₹160</div></div><div class="mi-p">From ₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Manchow</div><div class="mi-desc">Veg ₹125 · Chicken ₹160</div></div><div class="mi-p">From ₹125</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Clear Soup</div><div class="mi-desc">Veg ₹110 · Chicken ₹140</div></div><div class="mi-p">From ₹110</div></div>
+      </div>
+    </div>
+
+    <!-- SEAFOOD -->
+    <div class="panel" id="p-seafood">
+      <div class="menu-grid">
+        <div class="msec">Fish Curries</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Kumarakom<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kuttandan Fish Curry</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Alleppey Style Homely Fish Curry</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Shoppu Curry<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kottayam Fish Curry</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Chatty Curry<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Masala Fried Fish</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Vattichathu</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Tawa Fry</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Molie</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Travancore Fish Curry</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Travancore Fish Roast</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Meen Mulakittathu</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mango Curry</div></div><div class="mi-p">APS</div></div>
+        <div class="msec">Prawns &amp; Crab</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chemmeen Kumarakom<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹380</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chemmeen Kurumulaku</div></div><div class="mi-p">₹380</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chemmeen Varatiyathu</div></div><div class="mi-p">₹380</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chemmeen Mango Curry</div></div><div class="mi-p">₹380</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kayal Chemmeen</div></div><div class="mi-p">₹390</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chemmeen Dry Fry</div></div><div class="mi-p">₹380</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Prawns Tawa Fry</div></div><div class="mi-p">₹420</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Crab Malabari</div></div><div class="mi-p">₹350</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Crab Varatiyathu</div></div><div class="mi-p">₹350</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Crab Kodappuram</div></div><div class="mi-p">₹350</div></div>
+        <div class="msec">Squid &amp; Others</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Squid Dry Fry</div></div><div class="mi-p">₹280</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Squid Tawa Grilled</div></div><div class="mi-p">₹280</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Squid Varatiyathu</div></div><div class="mi-p">₹290</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Squid Roast</div></div><div class="mi-p">₹290</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kunjan Mathi Pepper Dry Fry</div></div><div class="mi-p">₹110</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Natholi Fry</div></div><div class="mi-p">₹180</div></div>
+      </div>
+    </div>
+
+    <!-- CHICKEN -->
+    <div class="panel" id="p-chicken">
+      <div class="menu-grid">
+        <div class="msec">Chicken Curries</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Palli Palayam<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹280</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Varatiyathu</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Chatti Curry</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Thenga Chuttarocha<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mapranam Chicken Fry</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Fry</div></div><div class="mi-p">₹250 / ₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Pepper Dry Fry</div></div><div class="mi-p">₹280</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pepper Chicken Masala</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Chettinaadu</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Tikka Masala</div></div><div class="mi-p">₹240 / ₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kadai Chicken</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Butter Chicken<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Payyoli Kozhi Porichathu<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹260 / ₹460</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chilli Chicken</div></div><div class="mi-p">₹240 / ₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Ginger Chicken</div></div><div class="mi-p">₹240 / ₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Garlic Chicken</div></div><div class="mi-p">₹240 / ₹450</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Manchuriyan</div></div><div class="mi-p">₹240 / ₹450</div></div>
+        <div class="msec">Chicken Stews</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Stew</div></div><div class="mi-p">₹240 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Malabari</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Alleppey Chicken Curry</div></div><div class="mi-p">₹220 / ₹410</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Achayan Chicken Curry<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹220 / ₹410</div></div>
+      </div>
+    </div>
+
+    <!-- MUTTON & BEEF -->
+    <div class="panel" id="p-mutton">
+      <div class="menu-grid">
+        <div class="msec">Mutton</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mutton Stew</div></div><div class="mi-p">₹310</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Modern Mutton Chops</div></div><div class="mi-p">₹310</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mutton Varatiyathu</div></div><div class="mi-p">₹310</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mutton Pepper Roast<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹310</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Nadan Irachi Curry</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Idiyappam Malabari</div></div><div class="mi-p">₹220</div></div>
+        <div class="msec">Beef</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Chilly Malabari<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Roast</div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Ularthiyathu</div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Pepper Peralan<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Beef Varattiyathu</div></div><div class="mi-p">₹220</div></div>
+        <div class="msec">Eggs</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Egg Roast</div></div><div class="mi-p">₹80</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Egg Masala</div></div><div class="mi-p">₹80</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Egg Malabari</div></div><div class="mi-p">₹80</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Quail Egg Talk</div></div><div class="mi-p">₹90</div></div>
+      </div>
+    </div>
+
+    <!-- VEGETARIAN -->
+    <div class="panel" id="p-veg">
+      <div class="menu-grid">
+        <div class="msec">Vegetarian Curries</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Alleppey Vegetable Curry<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹140</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tomato Fry<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹110</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Mulakittathu</div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Stew<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Malabari</div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mushroom Malabari</div></div><div class="mi-p">₹190</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mushroom Varatiyathu</div></div><div class="mi-p">₹190</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Paneer Mango Curry<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Ulli Theeyal</div></div><div class="mi-p">₹140</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Paneer Butter Masala</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Palak Paneer</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Aloo Gobi</div></div><div class="mi-p">₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Aloo Mutter</div></div><div class="mi-p">₹140</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Dal Fry<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹90</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Gobi Manchurian</div></div><div class="mi-p">₹170</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chilli Gobi</div></div><div class="mi-p">₹170</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chilli Paneer</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kadai Vegetable</div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kadai Paneer</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kadai Mushroom</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Angamaly Mango Curry<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹150</div></div>
+      </div>
+    </div>
+
+    <!-- RICE & BIRIYANI -->
+    <div class="panel" id="p-rice">
+      <div class="menu-grid">
+        <div class="msec">Rice &amp; Meals</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Plain Rice</div></div><div class="mi-p">₹60</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Ghee Rice</div></div><div class="mi-p">₹110</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Biriyani Rice</div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Curry Meals</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Meals</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Saffron Peas Pulao</div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Pulao</div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chilly Garlic Fried Rice</div><div class="mi-desc">Veg ₹200 · Chicken ₹240 · Mixed ₹260</div></div><div class="mi-p">From ₹200</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Schezwan Rice</div><div class="mi-desc">Veg ₹210 · Chicken ₹250 · Mixed ₹275</div></div><div class="mi-p">From ₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Schezwan Noodles</div><div class="mi-desc">Veg ₹210 · Chicken ₹250 · Mixed ₹275</div></div><div class="mi-p">From ₹210</div></div>
+        <div class="msec">Biriyani</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Vegetable Biriyani<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹140</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Egg Biriyani</div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Biriyani<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹180</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mutton Biriyani</div></div><div class="mi-p">₹320</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fish Biriyani</div></div><div class="mi-p">₹300</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Prawns Biriyani</div></div><div class="mi-p">₹310</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Bamboo Chicken Biriyani<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹200</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Naruneyy Chicken Biriyani</div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Naruneyy Mutton Biriyani</div></div><div class="mi-p">₹320</div></div>
+        <div class="msec">Tandoor</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Paneer Tikka</div></div><div class="mi-p">₹280</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chicken Tikka</div></div><div class="mi-p">₹330</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tandoor Grilled Fish</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tandoori Chicken</div></div><div class="mi-p">₹290 / ₹580</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Malai / Resmi / Hariyali / Dijon Tangri Kebab</div></div><div class="mi-p">₹350</div></div>
+        <div class="msec">Pasta House</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Carbonara</div></div><div class="mi-p">₹385</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pomodori</div></div><div class="mi-p">₹385</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pesto Misto</div></div><div class="mi-p">₹385</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Arabiyata</div></div><div class="mi-p">₹385</div></div>
+      </div>
+    </div>
+
+    <!-- BREADS -->
+    <div class="panel" id="p-breads">
+      <div class="menu-grid">
+        <div class="msec">Traditional Breads</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Appam<span class="badge badge-veg">Veg</span></div></div><div class="mi-p">₹15</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pathiri</div></div><div class="mi-p">₹10</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Chappathy</div></div><div class="mi-p">₹15</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kerala Paratha<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹18</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Wheat Paratha</div></div><div class="mi-p">₹20</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Puttu</div></div><div class="mi-p">₹12</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Idiyappam</div></div><div class="mi-p">₹10</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Rotti</div></div><div class="mi-p">₹25</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Naan</div></div><div class="mi-p">₹25</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Butter Naan</div></div><div class="mi-p">₹30</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kulcha</div></div><div class="mi-p">₹35</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Masala Kulcha</div></div><div class="mi-p">₹40</div></div>
+        <div class="msec">Big Smoke House BBQ</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Grouse Classic BBQ<span class="badge badge-sig">Signature</span></div></div><div class="mi-p">₹508</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Burnt Chipped BBQ Chicken</div></div><div class="mi-p">₹508</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pepper Chat BBQ Chicken<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹528</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fisherman Catch BBQ</div></div><div class="mi-p">APS</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Samba Chicken</div></div><div class="mi-p">₹528</div></div>
+      </div>
+    </div>
+
+    <!-- DRINKS & DESSERTS -->
+    <div class="panel" id="p-drinks">
+      <div class="menu-grid">
+        <div class="msec">Mocktails &amp; Juices</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Green Fire<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Kairali Drink</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Passion Fruit Ginger Ale</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">De Tax-ick</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Join The Q</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Choice Of Sarbath</div></div><div class="mi-p">₹160</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pineapple / Mixberries / Passion-fruit</div></div><div class="mi-p">₹70</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Lime Juice</div></div><div class="mi-p">₹50</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Lime Soda</div></div><div class="mi-p">₹60</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Seasonal Fresh Juice</div></div><div class="mi-p">₹120</div></div>
+        <div class="msec">Milkshakes &amp; Smoothies</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Lassi</div></div><div class="mi-p">₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fruit Lassi</div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Banana Smoothie</div></div><div class="mi-p">₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mixberries Smoothie</div></div><div class="mi-p">₹220</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Oreo Chocolate Shake<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Dates Milk Shake</div></div><div class="mi-p">₹230</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tender Coconut Milk Shake</div></div><div class="mi-p">₹180</div></div>
+        <div class="msec">Desserts</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Ney Payasam<span class="badge badge-sig">Traditional</span></div></div><div class="mi-p">₹80</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Elaneer Payasam</div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Ney Payasam with Ice Cream</div></div><div class="mi-p">₹130</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Banana Crepe</div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Notebook Falooda<span class="badge badge-pop">Popular</span></div></div><div class="mi-p">₹210</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fresh Fruit Salad</div></div><div class="mi-p">₹110</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Fresh Fruit Salad with Ice Cream</div></div><div class="mi-p">₹150</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Pudding</div></div><div class="mi-p">₹90</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Brownie with Ice Cream</div></div><div class="mi-p">₹120</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Mini Falooda</div></div><div class="mi-p">₹160</div></div>
+        <div class="msec">Beverages</div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Tea</div></div><div class="mi-p">₹20</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Coffee</div></div><div class="mi-p">₹24</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Lime Tea</div></div><div class="mi-p">₹15</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Boost / Horlicks</div></div><div class="mi-p">₹50</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Bottled Water</div></div><div class="mi-p">MRP</div></div>
+        <div class="mi"><div class="mi-l"><div class="mi-name">Soft Drinks</div></div><div class="mi-p">MRP</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section class="sec sec-warm">
+  <div class="container">
+    <div class="exp-grid">
+      <div>
+        <div class="label rv">Why We're Different</div>
+        <h2 class="h2 rv d1">A Dining <em>Experience</em><br>Like No Other</h2>
+        <p class="body-serif rv d2">From the moment you step into our warmly lit dining room at Forum Center Edappal, the fragrance of Malabar spices and the gentle sounds of a kitchen alive with care envelop you. This is not just a meal — it's a passage into Kerala's richest culinary heritage.</p>
+        <div class="feat rv d1">
+          <div class="feat-icon feat-icon-img"></div>
+          <div>
+            <div class="feat-h">Malabar Spice Heritage</div>
+            <p class="feat-p">Every dish is rooted in the ancient spice traditions of North Kerala — cinnamon, cardamom, kanthari, kodampuli, all sourced with care.</p>
+          </div>
+        </div>
+        <div class="feat rv d2">
+          <div class="feat-icon"></div>
+          <div>
+            <div class="feat-h">Global Fusion Inspiration</div>
+            <p class="feat-p">French, Thai, Japanese, Arabic and Indian techniques weave seamlessly with Kerala's kitchen to create truly one-of-a-kind dishes.</p>
+          </div>
+        </div>
+        <div class="feat rv d3">
+          <div class="feat-icon"></div>
+          <div>
+            <div class="feat-h">Free Home Delivery</div>
+            <p class="feat-p">We deliver across Edappal and Malappuram. Call +91 494-208 3000 or +91 808 9065 888 to order right now.</p>
+          </div>
+        </div>
+        <div class="feat rv d4">
+          <div class="feat-icon"></div>
+          <div>
+            <div class="feat-h">Catering &amp; Events</div>
+            <p class="feat-p">Planning a wedding or special occasion? Our catering team has earned rave reviews for professionalism and top-class food.</p>
+          </div>
+        </div>
+      </div>
+      <div class="exp-photos rv d2">
+        <img class="ep-main" src="https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=900&q=80" alt="Dining experience" loading="lazy">
+        <div class="ep-float">
+          <img src="https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?w=500&q=80" alt="Kerala spices" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REVIEWS ══ -->
+<section id="reviews" class="sec sec-deep">
+  <div class="container">
+    <div class="rev-header">
+      <div class="label rv" style="justify-content:center">Real Voices</div>
+      <h2 class="h2 rv d1" style="text-align:center">What Our <em>Guests</em> Say</h2>
+      <div class="rev-score rv d2">
+        <div class="rev-num">4.1</div>
+        <div>
+          <div class="stars-row">★★★★☆</div>
+          <div class="rev-meta">473 Reviews · Google Maps · Edappal</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card rv">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">The Achayan Chicken Curry had deep flavors with the right spice hit. The Nool Parotta was perfectly made — soft, flaky and fresh. The Thalassery Chicken Biryani stood out with its aroma and authentic Malabar taste. Truly a must-visit for Kerala cuisine lovers.</p>
+        <div class="rev-av"><div class="rev-circle">A</div><div><div class="rev-name">Arjun M.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+      <div class="rev-card rv d1">
+        <div class="rev-stars">★★★★☆</div>
+        <p class="rev-text">The ambiance is great, making it a comfortable spot to relax. The restaurant maintains good hygiene standards. The menu is well-curated, offering a great variety. An excellent spot to spend time with friends and family — the location inside Forum Mall is convenient.</p>
+        <div class="rev-av"><div class="rev-circle">S</div><div><div class="rev-name">Siyad K.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+      <div class="rev-card rv d2">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">Had them catering for a wedding and they were simply great. They helped build the menu and customise it for our guests. All staff were professional. The food and drinks were top class. We were so glad to work with them. 10/10 would recommend.</p>
+        <div class="rev-av"><div class="rev-circle">F</div><div><div class="rev-name">Fathima R.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+      <div class="rev-card rv">
+        <div class="rev-stars">★★★★☆</div>
+        <p class="rev-text">The Pandan Chicken and Kanthari Fish were the saving grace. Staff deserve 5 stars — very attentive and professional throughout. The biryani could be better, but the curries and starters are genuinely excellent. Always worth a visit when in Edappal.</p>
+        <div class="rev-av"><div class="rev-circle">N</div><div><div class="rev-name">Nisha V.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+      <div class="rev-card rv d1">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">Stepping into Calicut Notebook, I was immediately drawn to the warm, modern ambiance. The flavours were a symphony of spices and textures — a true celebration of Malabar cuisine. The presentation was exquisite with vibrant colors and artful plating.</p>
+        <div class="rev-av"><div class="rev-circle">P</div><div><div class="rev-name">Priya S.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+      <div class="rev-card rv d2">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">Bursting with flavor and cooked to perfection. If you love Keralite food, Calicut Notebook is the right choice. Try the Fish Chatty Curry with mango — superb taste! Great variety at very reasonable prices. A gem in Edappal.</p>
+        <div class="rev-av"><div class="rev-circle">R</div><div><div class="rev-name">Rahul K.</div><div class="rev-src">Google · Edappal</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT + MAP ══ -->
+<section id="contact" class="sec sec-darker">
+  <div class="container">
+    <div class="label rv" style="margin-bottom:.5rem">Find Us</div>
+    <h2 class="h2 rv d1">Visit Calicut Notebook <em>Edappal</em></h2>
+    <div class="contact-wrap" style="margin-top:3rem;">
+      <div>
+        <div class="ci rv">
+          <div class="ci-icon"></div>
+          <div>
+            <div class="ci-lbl">Address</div>
+            <div class="ci-val">2nd Floor, Forum Center Shopping Mall<br>Pattambi Road, Edappal<br>Malappuram — 679576, Kerala, India</div>
+          </div>
+        </div>
+        <div class="ci rv d1">
+          <div class="ci-icon"></div>
+          <div>
+            <div class="ci-lbl">Phone (3 Lines)</div>
+            <div class="ci-val">
+              <a href="tel:+914942083000">+91 494-208 3000</a><br>
+              <a href="tel:+918089065888">+91 808 9065 888</a>
+            </div>
+          </div>
+        </div>
+        <div class="ci rv d2">
+          <div class="ci-icon"></div>
+          <div>
+            <div class="ci-lbl">Email</div>
+            <div class="ci-val"><a href="mailto:notebookedappal@gmail.com">notebookedappal@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="ci rv d3">
+          <div class="ci-icon"></div>
+          <div>
+            <div class="ci-lbl">Website</div>
+            <div class="ci-val"><a href="https://www.calicutnotebook.com" target="_blank">www.calicutnotebook.com</a></div>
+          </div>
+        </div>
+        <div class="ci rv d4">
+          <div class="ci-icon"></div>
+          <div>
+            <div class="ci-lbl">Opening Hours — All Days</div>
+            <div class="hours-grid">
+              <div class="hours-item"><span class="hours-day">Monday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Tuesday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Wednesday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Thursday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Friday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Saturday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+              <div class="hours-item"><span class="hours-day">Sunday</span><span class="hours-time">11:00 AM – 11:00 PM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESERVATION FORM -->
+        <div class="res-card rv">
+          <h3>Reserve a Table</h3>
+          <div class="fg">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>Phone</label><input type="tel" placeholder="+91 ..."></div>
+            <div class="fg"><label>Guests</label>
+              <select>
+                <option>1 Guest</option><option>2 Guests</option>
+                <option>3–4 Guests</option><option>5–8 Guests</option><option>Large Party</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>Date</label><input type="date"></div>
+            <div class="fg"><label>Time</label><input type="time" value="13:00"></div>
+          </div>
+          <div class="fg"><label>Special Requests</label><textarea placeholder="Dietary needs, occasion, or anything else..."></textarea></div>
+          <button class="btn-spice" style="width:100%;text-align:center;" onclick="submitRes(this)">Confirm Reservation</button>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:.92rem;color:var(--smoke);text-align:center;margin-top:.9rem;">
+            Or call us: <a href="tel:+914942083000" style="color:var(--turmeric);text-decoration:none;">+91 494-208 3000</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- MAP BLOCK -->
+      <div>
+        <div class="map-block rv d2">
+          <iframe
+            class="map-frame"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5043!2d76.0062!3d10.7825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b39b9e292b9de9d%3A0xe6564d566e8e038b87!2sCalicut+Notebook+Restaurant+Edappal!5e0!3m2!1sen!2sin!4v1"
+            title="Calicut Notebook Restaurant Edappal Location">
+          </iframe>
+          <div class="map-bar">
+            <div>
+              <div class="map-addr"><strong>Forum Center, 2nd Floor</strong></div>
+              <div class="map-addr">Pattambi Road, Edappal, Malappuram 679576</div>
+            </div>
+            <a class="map-cta" href="https://maps.google.com/?q=Calicut+Notebook+Restaurant+Edappal&ll=10.782487,76.0084459" target="_blank">Get Directions</a>
+          </div>
+        </div>
+
+        <!-- nearby landmarks -->
+        <div style="margin-top:1.5rem;padding:1.5rem;background:rgba(245,237,216,.025);border:1px solid rgba(245,237,216,.07);border-radius:3px;" class="rv d3">
+          <div class="label" style="margin-bottom:.8rem;font-size:.6rem;">How to Find Us</div>
+          <p class="body-serif" style="font-size:1rem;line-height:1.75;">
+            We are located on the <strong style="color:var(--cream);">2nd floor of Forum Center Shopping Mall</strong>, Pattambi Road, Edappal — one of Malappuram's most accessible dining destinations. Ample parking available at Forum Center. Landmark: Forum Center Mall main entrance, ground floor elevator to 2nd floor.
+          </p>
+          <div style="display:flex;gap:1.5rem;margin-top:1.2rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--smoke);">
+              <span style="color:var(--turmeric)"></span> Edappal Town Centre — 2 min
+            </div>
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--smoke);">
+              <span style="color:var(--turmeric)"></span> Free Parking at Forum Center
+            </div>
+            <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--smoke);">
+              <span style="color:var(--turmeric)"></span> Free Home Delivery Available
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand-name">Calicut Notebook</div>
+        <div class="foot-brand-sub">Restaurant · Est. 2012</div>
+        <p class="foot-desc">The one and only South Indian fusion food restaurant chain — bringing the soul of Malabar to tables across India and the Gulf since 2012. Serving Edappal, Malappuram with love.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/NotebookEdappal/" target="_blank" class="soc">f</a>
+          <a href="https://www.instagram.com/calicut_notebook/" target="_blank" class="soc">✦</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-h">Navigate</div>
+        <ul class="foot-ul">
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#specialties">Signature Dishes</a></li>
+          <li><a href="#menu">Full Menu</a></li>
+          <li><a href="#reviews">Guest Reviews</a></li>
+          <li><a href="#contact">Find Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Dining Options</div>
+        <ul class="foot-ul">
+          <li><a href="#">Dine In</a></li>
+          <li><a href="#">Takeaway</a></li>
+          <li><a href="#">Free Home Delivery</a></li>
+          <li><a href="#">Private Events</a></li>
+          <li><a href="#">Wedding Catering</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <p class="foot-p">
+          2nd Floor, Forum Center<br>
+          Pattambi Road, Edappal<br>
+          Malappuram — 679576<br>
+          Kerala, India<br><br>
+          <a href="tel:+914942083000">+91 494-208 3000</a><br>
+          <a href="mailto:notebookedappal@gmail.com" style="font-size:.9rem;color:var(--smoke);">notebookedappal@gmail.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 Calicut Notebook Restaurant. All rights reserved. Demo website.</p>
+      <div class="foot-locs">
+        <span class="foot-loc">Abudhabi</span><span class="foot-loc">Dubai</span>
+        <span class="foot-loc">Sharjah</span><span class="foot-loc">Ajman</span>
+        <span class="foot-loc">Qatar</span><span class="foot-loc">Kochi</span>
+        <span class="foot-loc">Edappal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── TICKER ───
+const tickerItems = [
+  'Free Home Delivery · Edappal & Malappuram',
+  'Open Daily · 11 AM – 11 PM',
+  'Call Now · +91 494-208 3000',
+  'The One & Only South Indian Fusion Chain',
+  'Forum Center · 2nd Floor · Edappal',
+  'Dine In · Takeaway · Home Delivery',
+  'Wedding &amp; Event Catering Available',
+  'International Locations: Dubai · Sharjah · Abu Dhabi · Qatar'
+];
+const track = document.getElementById('tickerTrack');
+let html = '';
+for(let i=0;i<2;i++) tickerItems.forEach(t=>{
+  html += `<span class="ticker-item"><span class="ticker-dot"></span>${t}</span>`;
+});
+track.innerHTML = html;
+
+// ─── NAV SCROLL ───
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>40),{passive:true});
+
+// ─── MOBILE NAV ───
+const mobNav=document.getElementById('mobNav');
+document.getElementById('hbg').addEventListener('click',()=>mobNav.classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>mobNav.classList.remove('open'));
+document.querySelectorAll('.mob-l').forEach(a=>a.addEventListener('click',()=>mobNav.classList.remove('open')));
+
+// ─── PARTICLES ───
+const sparksEl=document.getElementById('sparks');
+for(let i=0;i<20;i++){
+  const s=document.createElement('div');s.className='spark';
+  const x=Math.random()*100,sz=Math.random()*3+1.5;
+  s.style.cssText=`left:${x}%;width:${sz}px;height:${sz}px;
+    animation-duration:${Math.random()*14+9}s;animation-delay:${Math.random()*12}s;
+    background:${['#C9922A','#D4860A','#B5451B','#E8B84B'][Math.floor(Math.random()*4)]}`;
+  sparksEl.appendChild(s);
+}
+
+// ─── REVEAL ───
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+// ─── MENU TABS ───
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const id=t.dataset.t;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    t.classList.add('on');
+    const panel=document.getElementById('p-'+id);
+    if(panel){
+      panel.classList.add('on');
+      const items=panel.querySelectorAll('.mi');
+      items.forEach((item,i)=>{
+        item.style.opacity='0';item.style.transform='translateY(10px)';
+        item.style.transition=`opacity .3s ease ${i*.018}s, transform .3s ease ${i*.018}s`;
+        requestAnimationFrame(()=>setTimeout(()=>{
+          item.style.opacity='1';item.style.transform='translateY(0)';
+        },10));
+      });
+    }
+  });
+});
+
+// ─── HERO PARALLAX ───
+const heroEl=document.getElementById('hero');
+heroEl.addEventListener('mousemove',e=>{
+  const r=heroEl.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  const ring=heroEl.querySelector('.hero-ring');
+  if(ring) ring.style.transform=`translate(calc(-50% + ${x*18}px), calc(-52% + ${y*12}px))`;
+},{passive:true});
+heroEl.addEventListener('mouseleave',()=>{
+  const ring=heroEl.querySelector('.hero-ring');
+  if(ring) ring.style.transform='translate(-50%, -52%)';
+});
+
+// ─── RESERVATION ───
+function submitRes(btn){
+  const card=btn.closest('.res-card');
+  const name=card.querySelector('input[type="text"]').value.trim();
+  if(!name){card.querySelector('input[type="text"]').focus();return;}
+  btn.textContent='✓ We\'ll call you to confirm!';
+  btn.style.background='var(--leaf)';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Confirm Reservation';btn.style.background='';btn.disabled=false;},4500);
+}
+</script>
+</body>
+</html>
