@@ -115,21 +115,31 @@ body::after{
 
 /* Mobile drawer */
 .mobile-nav{
-  position:fixed;inset:0;z-index:1002;
-  background:rgba(18,9,4,.98);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(320px, 85vw);
+  z-index:1002;
+  background:rgba(18,9,4,.99);
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:0;
+  padding:5rem 2rem 3rem;
   transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.175,1);
+  overflow-y:auto;
+  border-left:1px solid rgba(245,237,216,.06);
 }
 .mobile-nav.open{transform:translateX(0)}
 .mobile-nav a{
-  font-family:'Playfair Display',serif;font-size:2.2rem;font-style:italic;
+  font-family:'Playfair Display',serif;font-size:clamp(1.3rem,5vw,1.8rem);font-style:italic;
   color:rgba(245,237,216,.8);text-decoration:none;
-  transition:color .3s,transform .3s;
+  padding:.65rem 0;
+  border-bottom:1px solid rgba(245,237,216,.06);
+  width:100%;text-align:right;
+  transition:color .3s,padding-right .3s;
 }
-.mobile-nav a:hover{color:var(--turmeric);transform:translateX(8px)}
+.mobile-nav a:first-of-type{border-top:1px solid rgba(245,237,216,.06);}
+.mobile-nav a:hover{color:var(--turmeric);padding-right:.4rem;}
 .mobile-close{
-  position:absolute;top:1.5rem;right:1.8rem;
-  background:none;border:none;color:var(--cream);font-size:1.6rem;cursor:pointer;opacity:.7;
+  position:absolute;top:1rem;right:1.2rem;
+  background:none;border:none;color:var(--cream);font-size:1.4rem;cursor:pointer;opacity:.7;
+  padding:.4rem;line-height:1;
 }
 
 /* ─── ANNOUNCEMENT BAR ─── */
@@ -164,8 +174,9 @@ body::after{
 #hero{
   position:relative;min-height:100vh;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  align-items:center;justify-content:space-between;
   overflow:hidden;padding-top:var(--header-h);
+  padding-bottom:0;
 }
 .hero-bg{
   position:absolute;inset:0;
@@ -201,7 +212,8 @@ body::after{
 .hero-inner{
   position:relative;z-index:2;
   display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:3rem 2rem 5rem;max-width:920px;
+  padding:2rem 2rem;max-width:920px;width:100%;
+  flex:1;justify-content:center;
 }
 .hero-kicker{
   font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;
@@ -220,9 +232,9 @@ body::after{
 }
 .hl-top{font-size:.6rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(245,237,216,.5);font-weight:300;}
 .hl-brand{
-  font-family:'Playfair Display',serif;font-size:clamp(3.2rem,7vw,6rem);
-  font-weight:900;color:var(--cream);line-height:1;letter-spacing:.02em;
-  text-shadow:0 0 80px rgba(181,69,27,.3);
+  font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,4.8rem);
+  font-weight:900;color:var(--cream);line-height:1;letter-spacing:.06em;
+  text-shadow:0 0 80px rgba(181,69,27,.3);white-space:nowrap;
 }
 .hl-notebook{
   font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.8rem);
@@ -269,11 +281,13 @@ body::after{
 .btn-ghost:hover{border-color:var(--turmeric);color:var(--turmeric);transform:translateY(-2px);}
 /* hero stats strip */
 .hero-stats{
-  position:absolute;bottom:0;left:0;right:0;
+  position:relative;
+  width:100%;
   display:grid;grid-template-columns:repeat(4,1fr);
   border-top:1px solid rgba(245,237,216,.06);
-  background:rgba(18,9,4,.6);backdrop-filter:blur(8px);
-  z-index:3;
+  background:rgba(18,9,4,.6);
+  z-index:2;
+  flex-shrink:0;
 }
 .hs-item{
   padding:1.4rem 1rem;border-right:1px solid rgba(245,237,216,.06);
@@ -284,9 +298,10 @@ body::after{
 .hs-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);}
 /* scroll arrow */
 .hero-scroll{
-  position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
+  position:relative;z-index:2;
   display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  opacity:0;animation:fade .8s ease 1.4s forwards;cursor:pointer;z-index:4;
+  margin-top:2rem;
+  opacity:0;animation:fade .8s ease 1.4s forwards;cursor:pointer;
 }
 .hero-scroll-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--smoke);}
 .hero-scroll-arrow{width:1px;height:44px;background:linear-gradient(to bottom,var(--turmeric),transparent);animation:arrow-pulse 2s ease-in-out infinite;}
@@ -638,16 +653,22 @@ footer{background:#060302;padding:4.5rem 0 2rem;border-top:1px solid rgba(245,23
   .sec{padding:4.5rem 0;}
   #nav{height:var(--nav-h);}.nav-logo-main{font-size:1.1rem;}
   .hero-stats{display:none;}
+  .hero-scroll{padding:.5rem 0;}
+  .hero-inner{padding:1.5rem 1.2rem;}
+  .hero-kicker{font-size:.6rem;letter-spacing:.25em;gap:.7rem;margin-bottom:1.2rem;}
+  .hero-tagline{font-size:1.1rem;margin-bottom:2rem;}
   .sigs-grid{grid-template-columns:1fr;}
   .menu-grid{grid-template-columns:1fr;}
   .mi:nth-child(even){border-right:none;}
   .rev-grid{grid-template-columns:1fr;}
   .foot-grid{grid-template-columns:1fr;}
   .foot-bottom{flex-direction:column;text-align:center;}
-  .hl-brand{font-size:3rem;}
-  .hl-notebook{font-size:1.5rem;}
+  .hl-brand{font-size:clamp(1.3rem,7vw,2.2rem);white-space:nowrap;letter-spacing:.04em;}
+  .hl-notebook{font-size:clamp(1.1rem,5vw,1.5rem);}
   .fg-row{grid-template-columns:1fr;}
   .tabs{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .btn-spice,.btn-ghost{width:100%;max-width:280px;text-align:center;}
 }
 </style>
 </head>
@@ -714,9 +735,7 @@ footer{background:#060302;padding:4.5rem 0 2rem;border-top:1px solid rgba(245,23
 
     <div class="hero-logomark">
       <div class="hero-logomark-inner">
-        <span class="hl-top">Calicut</span>
-        <div class="hl-divider"><span class="hl-divider-line"></span><span class="hl-divider-icon">✦</span><span class="hl-divider-line"></span></div>
-        <span class="hl-brand">NOTEBOOK</span>
+        <span class="hl-brand">CALICUT NOTEBOOK</span>
         <span class="hl-notebook">Restaurant</span>
         <div class="hl-divider"><span class="hl-divider-line"></span><span class="hl-divider-icon">✦</span><span class="hl-divider-line"></span></div>
         <span class="hl-sub">Forum Center · Edappal · Malappuram</span>
@@ -732,11 +751,11 @@ footer{background:#060302;padding:4.5rem 0 2rem;border-top:1px solid rgba(245,23
       <a href="#menu" class="btn-spice">Explore the Menu</a>
       <a href="#contact" class="btn-ghost">Reserve a Table</a>
     </div>
-  </div>
 
-  <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-    <div class="hero-scroll-arrow"></div>
-    <span class="hero-scroll-label">Scroll</span>
+    <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+      <div class="hero-scroll-arrow"></div>
+      <span class="hero-scroll-label">Scroll</span>
+    </div>
   </div>
 
   <div class="hero-stats">
